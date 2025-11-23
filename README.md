@@ -1,4 +1,5 @@
-PwnedPwd stand for "Powned Password ?"
+PwnedPwd stand for "Pwned Password ?"
+
 
 This script was written to share the ability to safely check if your password(s) have been leaked.
 
