@@ -6,7 +6,7 @@ It was also written to add it to the scripts (bash, php and python) written by y
 
 I autorise him to publish my script on his GitHub repository.
 
-To use it, you will need to install a copy of curl.exe in the script directory, or modify the $CURL var to then location of curl.exe.
+To use it, you will need to install a copy of curl.exe in the script directory, or modify the $CURL var to the location of curl.exe.
 
 When executed, you will be prompted to enter your password in an inputbox. The password you type isn't displayed at all.
 
