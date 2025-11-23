@@ -6,6 +6,7 @@
 ; Déclaration et initialisation des variables
 Local $URL, $Hash, $HeadHash, $TailHash, $PID, $TabResult, $Cpt, $NbOccurences, $TabTemp
 $URL = "https://api.pwnedpasswords.com/range/"
+$CURL = @ScriptDir & "\curl.exe"
 
 ; Inputbox affichant des '$' à la saisie, directement chiffré dans $Hash
 $Hash = _Crypt_HashData(InputBox("Mot de passe", "Veuillez saisir le mot de passe à vérifier :", "", "*"), $CALG_SHA1)
@@ -16,7 +17,7 @@ $HeadHash = StringLeft($Hash, 5)
 $TailHash = StringRight($Hash, 35)
 
 ; Interrogation du site et récupération du résultat dans un tableau
-$PID = Run(@ScriptDir & "\curl.exe -s " & $URL & $HeadHash, @ScriptDir, @SW_HIDE, $STDOUT_CHILD)
+$PID = Run($CURL & " -s " & $URL & $HeadHash, @ScriptDir, @SW_HIDE, $STDOUT_CHILD)
 ProcessWaitClose($PID)
 $TabResult = StringSplit(StringReplace(StdoutRead($PID), @CRLF, ";"), ";")
 
@@ -32,5 +33,6 @@ If $NbOccurences = "" Or $NbOccurences = " " Then $NbOccurences = 0
 ConsoleWrite("NB = " & $NbOccurences & @CRLF)
 If $NbOccurences <> "" Then MsgBox(0, "Mot de passe vérifié", "Le mot de passe dont le hash est " & @CRLF & @CRLF & $HeadHash & "  " & $TailHash & @CRLF & @CRLF & " a " & $NbOccurences & " occurences !")
 If $NbOccurences = "" Or $NbOccurences = 0 Then MsgBox(0, "Mot de passe vérifié", "Le mot de passe dont le hash est " & @CRLF & @CRLF & $HeadHash & "  " & $TailHash & @CRLF & @CRLF & "n'a pas été trouvé !")
+
 
 
